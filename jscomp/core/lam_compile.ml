@@ -303,7 +303,9 @@ and compile_external_field_apply ?(dynamic_import = false) (appinfo : Lam.apply)
             | Submodule _ | Single Arity_na ->
                 E.call ~info:Js_call_info.dummy fn args
             | Single x ->
-                apply_with_arity fn ~arity:(Lam_arity.extract_arity x) args)
+                apply_with_arity fn ~arity:(Lam_arity.extract_arity x) args
+            | Value -> 
+                failwith "Unexpected Value arity in compile_external_field_apply")
       in
       Js_output.output_of_block_and_expression lambda_cxt.continuation args_code
         expression

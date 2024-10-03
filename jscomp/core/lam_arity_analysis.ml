@@ -48,7 +48,8 @@ let rec get_arity (meta : Lam_stats.t) (lam : Lam.t) : Lam_arity.t =
       } -> (
       match (Lam_compile_env.query_external_id_info ~dynamic_import id name).arity with
       | Single x -> x
-      | Submodule _ -> Lam_arity.na)
+      | Submodule _ -> Lam_arity.na
+      | Value -> failwith "Unexpected Value arity")
   | Lprim
       {
         primitive = Pfield (m, _);
@@ -64,7 +65,9 @@ let rec get_arity (meta : Lam_stats.t) (lam : Lam.t) : Lam_arity.t =
       } -> (
       match (Lam_compile_env.query_external_id_info ~dynamic_import id name).arity with
       | Submodule subs -> subs.(m) (* TODO: shall we store it as array?*)
-      | Single _ -> Lam_arity.na)
+      | Single _ -> Lam_arity.na
+      | Value -> failwith "Unexpected Value arity")
+
   | Lprim
       { primitive = Praw_js_code { code_info = Exp (Js_function { arity }) } }
     ->

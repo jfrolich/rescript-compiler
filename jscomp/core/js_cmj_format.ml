@@ -24,7 +24,7 @@
 
 [@@@warning "+9"]
 
-type arity = Single of Lam_arity.t | Submodule of Lam_arity.t array
+type arity = Single of Lam_arity.t | Submodule of Lam_arity.t array | Value
 
 (* TODO: add a magic number *)
 type cmj_value = {

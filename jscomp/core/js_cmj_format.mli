@@ -45,7 +45,7 @@
     ]}
 *)
 
-type arity = Single of Lam_arity.t | Submodule of Lam_arity.t array
+type arity = Single of Lam_arity.t | Submodule of Lam_arity.t array | Value
 
 type cmj_value = {
   arity : arity;

@@ -58,9 +58,16 @@ let pp_cmj
             (fun i arity ->
               f "%s[%i] : %s \n" name i
                 (Format.asprintf "%a" Lam_arity.print arity))
-            xs);
+            xs
+      | Value ->
+          f "%s: Value\n" name;
+          (match persistent_closed_lambda with
+          | None -> f "%s: not saved\n" name
+          | Some lam ->
+              f "%s: ======[start]\n" name;
+              f "%s\n" (Lam_print.lambda_to_string lam);
+              f "%s: ======[finish]\n" name));
       f "\n")
-
 let () =
   match Sys.argv with
   | [| _; file |] ->
